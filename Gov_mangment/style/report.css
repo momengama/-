@@ -1,0 +1,51 @@
+/* صفحة التقرير والطباعة. الألوان من :root في main.css. */
+.report-page-body { background: var(--bg); padding: 16px; }
+.report-bar { max-width: 860px; margin: 0 auto 16px; display: flex; gap: 10px; justify-content: space-between; }
+.report-bar .btn { display: inline-flex; align-items: center; text-decoration: none; }
+
+.sheet {
+  max-width: 860px; margin: 0 auto; background: #fff; color: var(--text);
+  padding: 40px 44px; border-radius: 12px; font-size: 15px; line-height: 1.7;
+  display: grid; gap: 28px;
+}
+.sheet h1 { font-size: 26px; line-height: 1.4; font-weight: 700; text-wrap: balance; }
+.sheet h2 { font-size: 19px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--brand); }
+.sheet h3 { font-size: 17px; font-weight: 700; }
+.sheet section, .sheet figure { margin: 0; min-width: 0; }
+.r-meta { font-size: 13px; color: var(--muted); }
+.r-empty { text-align: center; padding: 40px 0; display: grid; gap: 12px; }
+.r-empty a { color: var(--brand); }
+
+.r-summary { border: 2px solid var(--brand); border-radius: 10px; padding: 18px 20px; display: grid; gap: 6px; }
+.r-label { font-size: 13px; font-weight: 700; color: var(--brand); }
+.r-big { font-size: 19px; font-weight: 700; line-height: 1.6; }
+
+.sheet table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; }
+.sheet th, .sheet td { padding: 8px 6px; text-align: right; border-bottom: 1px solid var(--border); vertical-align: top; }
+.sheet thead th { font-size: 12px; font-weight: 700; color: var(--muted); border-bottom: 2px solid var(--text); }
+.sheet table.kv th { width: 34%; font-weight: 500; color: var(--muted); }
+.sheet tfoot td { font-weight: 700; border-top: 2px solid var(--text); }
+.sheet .row-base td { background: var(--brand-soft); font-weight: 600; }
+.sheet .good { color: var(--brand-dark); font-weight: 700; }
+.sheet .bad { color: var(--danger); font-weight: 700; }
+.sheet caption, .sheet figcaption { text-align: right; font-size: 13px; color: var(--muted); padding-bottom: 6px; }
+.sheet .chart { max-width: 600px; margin-inline: auto; }
+
+.team-report { border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: grid; gap: 10px; }
+.team-report h3 span { font-weight: 400; color: var(--muted); font-size: 14px; }
+.team-report .r-lead { font-weight: 600; }
+.team-report ul { margin: 0; padding-inline-start: 20px; font-size: 13px; }
+.sheet .notes { margin: 0; padding-inline-start: 20px; display: grid; gap: 4px; font-size: 14px; }
+
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body, .report-page-body { background: #fff; padding: 0; }
+  .no-print { display: none !important; }
+  .sheet { max-width: none; padding: 0; border-radius: 0; gap: 22px; font-size: 13px; }
+  .sheet h1 { font-size: 22px; }
+  .sheet section, .sheet figure, .team-report, .sheet tr { break-inside: avoid; }
+  .sheet h2, .sheet h3 { break-after: avoid; }
+  .sheet .chart { max-width: 520px; }
+  /* الألوان تتطبع زي ما هي، وتفضل مقروءة بالأبيض والأسود */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

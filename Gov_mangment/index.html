@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخطط إنجاز مشاريع </title>
+
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b6b5f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style/mediaquery.css">
+</head>
+<body>
+
+
+<main>
+
+<!------------------------------------------------------------------ start nav ------------------------------------------------------------>
+    <nav>
+
+        <div class="navbar" style ="display: flex; align-items: center; justify-content: space-between; gap:10px;">
+                         <!---------------------------------------------- icon ---------------------------------------------->
+            <div class="logo">
+                <svg width="22" height="22" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 9h18M3 15h18M9 3v18M15 3v18M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/>
+                </svg>
+            </div>
+
+            <div class="sub-title">
+                <h3>مخطط إنجاز مشاريع </h3>
+                <p>حساب مدة تحديث المباني بحسب التيمز والجريدات</p>
+            </div>
+
+        </div>
+
+           <div class="nav-btns">
+            <button class="nav-btn" id="btn1" type="button"> عرض التقارير</button>
+            <button class="nav-btn" id="btn2" type="button">تصدير</button>
+        </div>
+
+    </nav>
+<!------------------------------------------------------------------ end nav ------------------------------------------------------------>
+
+
+
+
+
+
+
+<!------------------------------------------------------------------ start aside ------------------------------------------------------------>
+    <aside>
+
+        <div class="project">
+            <div class="aside-title">المشروع</div>
+            <div class="aside-content">
+
+                <div class="govs">
+                        <label for="gov">المحافظة</label>
+                        <select id="gov" name="gov" class="goverment">
+                        <option value="">اختر</option>
+                    </select>
+                    <span class="hint" id="save-status">اختر محافظة لتبدأ، وبياناتها بتتحفظ في ملف خاص بيها.</span>
+                    </div>
+
+                    <div class="data">
+                        <label for="data">تاريخ بداية المشروع</label>
+                        <input type="date" id="data" name="start_date">
+                    </div>
+
+            </div>
+        </div>
+
+        <div class="counts">
+        <div class="counts-title">حجم الشغل </div>
+        <div class="count-bulid">
+            <label for="count-bulid">عدد المباني</label>
+            <input type="number" id="count-bulid" name="count-bulild" class="count-bulid" min="0" step="1" inputmode="numeric">
+        </div>
+
+        <div class="count-grids">
+            <label for="count-grids">عدد الجريدات</label>
+            <input type="number" id="count-grids" name="count-grids" class="count-grids" min="0" step="1" inputmode="numeric">
+        </div>
+
+        <div class="grids-file">
+            <label for="grids-file">أو ارفع ملف الجريدات (CSV من QGIS)</label>
+            <input type="file" id="grids-file" accept=".csv,.txt">
+            <span class="hint" id="grids-info">الملف فيه عمود لرقم الجريد وعمود لعدد المباني في الجريد.</span>
+            <button type="button" class="link-btn" id="grids-clear" hidden>إزالة الملف والرجوع للإدخال اليدوي</button>
+        </div>
+
+        <span class="hint avg" id="avg-per-grid"></span>
+
+          </div>
+
+
+        <div class="teams">
+
+        <div class="teams-head">
+            <div class="teams-title">التيميز</div>
+            <div class="teams-subtitle">إجمالي الموظفين: <span id="total-employees">0</span></div>
+                </div>
+
+            <div id="teams-list"></div>
+
+            <button type="button" id="add-team">إضافة تيم</button>
+
+            <span>التيم ليدر غير محسوب في عدد الأفراد</span>
+
+        </div>
+
+
+            <div class="resut-workinginday">
+                <label for="resut-workinginday"> إنتاجية الفرد (مبنى في اليوم)</label>
+                <input type="number" id="resut-workinginday" name="resut-workinginday" class="resut-workinginday" min="1" step="1" inputmode="numeric">
+            </div>
+
+
+            <div class="workdays">
+                <div class="aside-title">أيام العمل في الأسبوع</div>
+                <div class="days" id="workdays"></div>
+                <span class="hint">اللي مش محدد إجازة أسبوعية (الجمعة والسبت افتراضيًا).</span>
+            </div>
+
+
+            <div class="leaves">
+                <div class="aside-title">الإجازات والغياب</div>
+
+                <div class="sub-label">إجازات رسمية</div>
+                <div id="holidays" class="chips"></div>
+                <div class="inline-form">
+                    <input type="date" id="holiday-date" aria-label="تاريخ الإجازة">
+                    <input type="text" id="holiday-note" aria-label="سبب الإجازة" placeholder="السبب (اختياري)">
+                    <button type="button" class="btn" id="add-holiday">إضافة</button>
+                </div>
+
+                <div class="sub-label">غياب أفراد (عزاء، مرض، إجازة)</div>
+                <div id="absences" class="chips"></div>
+                <button type="button" class="btn" id="add-absence">+ إضافة غياب</button>
+
+                <form id="absence-form" class="absence-form" hidden>
+                    <div class="af-field"><label for="abs-team">التيم</label><select id="abs-team"></select></div>
+                    <div class="af-field"><label for="abs-people">عدد الغايبين</label><input type="number" id="abs-people" min="1" step="1" value="1"></div>
+                    <div class="af-field"><label for="abs-from">من</label><input type="date" id="abs-from"></div>
+                    <div class="af-field"><label for="abs-to">إلى</label><input type="date" id="abs-to"></div>
+                    <div class="af-field af-wide"><label for="abs-reason">السبب (اختياري)</label><input type="text" id="abs-reason" placeholder="عزاء، مرض، إجازة"></div>
+                    <span class="form-error af-wide" id="abs-error" role="alert"></span>
+                    <div class="af-actions af-wide">
+                        <button type="submit" class="btn btn-brand">حفظ الغياب</button>
+                        <button type="button" class="btn" id="abs-cancel">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="danger-zone">
+                <button type="button" class="btn btn-danger" id="reset-gov">مسح بيانات المحافظة والبدء من الأول</button>
+                <span class="hint" id="reset-hint">بيمسح ملف المحافظة نهائيًا.</span>
+            </div>
+
+
+    </aside>
+
+<!------------------------------------------------------------------ end aside ------------------------------------------------------------>
+
+
+
+
+
+
+<!------------------------------------------------------------------ start view  ----------------------------------------------------------------->
+
+
+
+
+
+<div class="view">
+    
+    <div class="panel empty" id="empty">
+        <div class="empty-title" id="empty-title">اختر محافظة لتبدأ</div>
+        <p id="empty-msg">اختار المحافظة من القايمة، وبعدها أدخل عدد المباني وأضف التيمز، وهتظهر النتائج هنا فورًا.</p>
+    </div>
+    
+    <div class="results" id="results" hidden>
+        
+        <div class="stats">
+            <div class="stat stat-hero">
+                <span class="label">تاريخ الانتهاء المتوقع</span>
+                <span class="value" id="end-date"></span>
+                <span class="note" id="end-note"></span>
+            </div>
+            <div class="stat">
+                <span class="label">أيام العمل</span>
+                <span class="value"><span id="work-days"></span> <small>يوم</small></span>
+                <span class="note" id="work-days-note"></span>
+            </div>
+            <div class="stat">
+                <span class="label">المدة بالأسابيع</span>
+                <span class="value"><span id="weeks"></span> <small id="weeks-unit">أسبوع</small></span>
+                <span class="note" id="weeks-note"></span>
+            </div>
+            <div class="stat">
+                <span class="label">الإنتاج اليومي الكلي</span>
+                <span class="value"><span id="daily-total"></span> <small>مبنى</small></span>
+                <span class="note" id="daily-note"></span>
+            </div>
+        </div>
+        
+        <section class="panel">
+            <div class="section-head">
+                <h2>الجدول الزمني للتيمز</h2>
+                <div class="legend">
+                    <span><i class="sw sw-work"></i>يوم عمل</span>
+                        <span><i class="sw sw-holiday"></i>إجازة رسمية</span>
+                        <span><i class="sw sw-absence"></i>غياب فرد أو أكثر</span>
+                        <span><i class="sw sw-idle"></i>التيم خلّص نصيبه</span>
+                    </div>
+                </div>
+                <div class="scroll-x" id="gantt"></div>
+            </section>
+            
+            <div class="two-col">
+                <section class="panel">
+                    <div class="section-head"><h2>الإنتاج الأسبوعي</h2><span class="hint">المباني المنجزة في كل أسبوع</span></div>
+                    <div id="weekly-chart"></div>
+                </section>
+                <section class="panel">
+                    <div class="section-head"><h2>تقدم المشروع</h2><span class="hint">المباني المنجزة بالتراكم</span></div>
+                    <div id="progress-chart"></div>
+                </section>
+            </div>
+            
+            <section class="panel">
+                <div class="section-head"><h2>أداء كل تيم</h2><span class="hint">النصيب بحسب عدد أفراد التيم، وكل تيم بيتحسب لوحده</span></div>
+                <div class="scroll-x">
+                    <table class="data-table">
+                        <thead><tr><th>التيم</th><th>الأفراد</th><th>يوميًا</th><th>أسبوعيًا</th><th>الجريدات</th><th>المباني</th><th>أيام التيم</th><th>ينتهي</th></tr></thead>
+                        <tbody id="teams-table"></tbody>
+                        <tfoot id="teams-foot"></tfoot>
+                    </table>
+                </div>
+            </section>
+            
+            <section class="panel" id="impact-panel" hidden>
+                <div class="section-head"><h2>أثر الغياب</h2><span class="hint">الوقت الإضافي جوه كل تيم، وأثره على الإجمالي</span></div>
+                <p class="impact-summary" id="impact-summary"></p>
+                <div class="scroll-x">
+                    <table class="data-table">
+                        <thead><tr><th>التيم</th><th>أيام الغياب</th><th>مباني ضايعة</th><th>وقت إضافي جوه التيم</th><th>أيام التيم (قبل ← بعد)</th><th>أثره على الإجمالي</th></tr></thead>
+                        <tbody id="impact-table"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="section-head"><h2>مقارنة السيناريوهات</h2><span class="hint">لو غيرنا عدد الأفراد، كام يوم هنوفر أو نخسر؟</span></div>
+                <div id="scenarios-chart"></div>
+                <div class="scroll-x">
+                    <table class="data-table">
+                        <thead><tr><th>السيناريو</th><th>الأفراد</th><th>أيام العمل</th><th>تاريخ الانتهاء</th><th>الفرق</th></tr></thead>
+                        <tbody id="scenarios-table"></tbody>
+                    </table>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+    
+</main>
+
+<!------------------------------------------------------------------ End view  ----------------------------------------------------------------->
+
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="demo/engine.js"></script>
+<script src="demo/store.js"></script>
+<script src="demo/charts.js"></script>
+<script src="demo/Demo.js"></script>
+
+</body>
+</html>

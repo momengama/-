@@ -1,0 +1,7 @@
+{
+  "name": "gov-mangment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "مخطط إنجاز مشاريع GIS",
+  "scripts": { "start": "node server.js" }
+}

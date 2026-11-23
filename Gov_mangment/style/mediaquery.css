@@ -1,0 +1,28 @@
+/* ================= موبايل وتابلت ================= */
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  aside,
+  .view {
+    margin-inline: 20px;
+  }
+
+  .counts {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .stat .value {
+    font-size: 24px;
+  }
+}
